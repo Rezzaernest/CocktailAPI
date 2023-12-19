@@ -15,8 +15,7 @@ This test suite focuses on validating the functionality of the CocktailDB API by
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/your-username/cocktail-api-tests.git
-
+   git clone https://github.com/Rezzaernest/CocktailAPI.git
 2. **Install Dependencies:**
 
    ```bash
