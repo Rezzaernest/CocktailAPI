@@ -2,7 +2,6 @@ package cocktailTest;
 import io.restassured.RestAssured;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.lessThan;
 
@@ -36,7 +35,5 @@ public class PerformanceTests {
                 .statusCode(200)
                 .time(lessThan(2000L)); // Set a threshold for response time in milliseconds
     }
-
-    // Add more performance test cases as needed
 
 }

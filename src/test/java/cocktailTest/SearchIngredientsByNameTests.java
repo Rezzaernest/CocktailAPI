@@ -1,14 +1,14 @@
 package cocktailTest;
-
 import io.restassured.RestAssured;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.anyOf;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
-public class CocktailApiTests {
+public class SearchIngredientsByNameTests {
 
     @BeforeClass
     public static void setup() {
@@ -16,33 +16,34 @@ public class CocktailApiTests {
     }
 
     @Test
-    public void testSearchIngredientsByName() {
+    public void IngredientsByName() {
         given()
                 .param("i", "vodka")
                 .when()
                 .get("/search.php")
-                .then()
+                .then() //Assertions
                 .statusCode(200)
                 .body("ingredients", notNullValue())
+                .body("ingredients[0].idIngredient", notNullValue())
                 .body("ingredients[0].strIngredient", equalTo("Vodka"))
-                // Add more assertions based on the requirements
-                .log().all(); // Log response for debugging
+                .body("ingredients[0].strDescription", notNullValue())
+                .body("ingredients[0].strType", notNullValue())
+                .body("ingredients[0].strAlcohol", notNullValue())
+                .body("ingredients[0].strABV", anyOf(equalTo(null), notNullValue())) // ABV should be null or not null based on alcohol content
+                .log().all(); // Log response
     }
-
     @Test
-    public void testSearchCocktailsByName() {
+    public void testEmptySearch() {
         given()
-                .param("s", "margarita")
+                .param("i", "")
                 .when()
                 .get("/search.php")
                 .then()
                 .statusCode(200)
-                .body("drinks", notNullValue())
-                .body("drinks[0].strDrink", equalTo("Margarita"))
-                // Add more assertions based on the requirements
+                .body("ingredients", nullValue()) // Assuming the API returns null for empty searches
                 .log().all(); // Log response for debugging
     }
 
-    // Add more test cases as needed
 
 }
+

@@ -2,12 +2,10 @@ package cocktailTest;
 import io.restassured.RestAssured;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.lessThan;
 
-public class StressTest {
+public class StressTests {
 
     @BeforeClass
     public static void setup() {
@@ -49,7 +47,5 @@ public class StressTest {
 
         }
     }
-
-    // Add more stress test cases as needed
 
 }
