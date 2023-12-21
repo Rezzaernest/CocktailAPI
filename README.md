@@ -28,6 +28,25 @@ Execute tests using Maven:
    mvn test
 
 ## Project Structure
+
+CocktailAPI
+├── src
+│   ├── main
+│   │   └──java
+│   │      └── org
+|   |          └── cocktailAPI
+│   │              └── Main.java
+│   └── test
+│       └── java
+│           └── cocktailTest
+│               ├── SearchIngredientsByNameTests.java
+│               ├── StressTests.java
+│               ├── PerformanceTests.java
+│               └── SearchCocktailsByNameTests.java
+├── .gitignore
+├── README.md
+└── pom.xml
+
 The project structure is as follows:
 
 - src/test/java/packageName/: Contains the test classes.
@@ -55,4 +74,15 @@ The project structure is as follows:
 - setup(): Configures the base URI for the CocktailDB API.
 - CocktailsByName(): Tests the API endpoint for searching cocktails by name.
 - testAlphaNumericSearch(): Tests the API behavior for an alphanumeric search.
+
+## Test Cases 
+
+| Test Case ID                    | Test Type            | Test Case            | Input      | Expected Output                                                                                                   |
+|---------------------------------|----------------------|----------------------|------------|-------------------------------------------------------------------------------------------------------------------|
+| Test1_SearchIngredientsByName   | Search Ingredients By Name | Positive Test Case | vodka      | Ingredient ID, Ingredient, Description, Type, Alcohol, ABV should be present and correct. If non-alcoholic, Alcohol and ABV should be null. If alcoholic, Alcohol should be 'yes,' and ABV should not be null. |
+|                                 |                        | Negative Test Case   | ""         | The API should not return results                                                                                 |
+| Test2_SearchCocktailsByName     | Search Cocktails By Name   | Positive Test Case | margarita  | Ensure case-insensitivity of the search. Validate the presence and correctness of properties in the response based on the provided schema. |
+|                                 |                        | Negative Test Case   | AbC12345   | The API should return drinks as null, as the cocktail does not exist in the cocktail DB.                         |
+| Test3_Performance               | Non-Functional Tests | Performance Testing  |            | Evaluate the system's response time under high load. Simulate concurrent requests to the API and measure the response time. |
+| Test4_Stress                    | Non-Functional Tests | Stress Testing       |            | Ensure that the system performance remains stable under extensive stress test and API response times remains under threshold |
 
