@@ -28,7 +28,14 @@ Execute tests using Maven:
    mvn test
 
 ## Project Structure
+The project structure is as follows:
 
+- src/test/java/packageName/: Contains the test classes.
+- pom.xml: Maven configuration file with dependencies and build settings.
+- README.md: Project information and instructions.
+
+
+````
 CocktailAPI
 ├── src
 │   ├── main
@@ -46,12 +53,8 @@ CocktailAPI
 ├── .gitignore
 ├── README.md
 └── pom.xml
+````
 
-The project structure is as follows:
-
-- src/test/java/packageName/: Contains the test classes.
-- pom.xml: Maven configuration file with dependencies and build settings.
-- README.md: Project information and instructions.
 
 ## Test Structure
 
