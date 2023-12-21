@@ -5,7 +5,7 @@ import org.junit.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.lessThan;
 
-public class TestPerformance_Test {
+public class Test3_Performance {
 
     @BeforeClass
     public static void setup() {

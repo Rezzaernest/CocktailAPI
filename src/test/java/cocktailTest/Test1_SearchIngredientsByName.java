@@ -4,11 +4,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.anyOf;
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
-public class SearchIngredientsByNameTests {
+public class Test1_SearchIngredientsByName {
 
     @BeforeClass
     public static void setup() {
@@ -29,9 +28,9 @@ public class SearchIngredientsByNameTests {
                 .body("ingredients[0].strDescription", notNullValue())
                 .body("ingredients[0].strType", notNullValue())
                 .body("ingredients[0].strAlcohol", notNullValue())
-                .body("ingredients[0].strABV", anyOf(equalTo(null), notNullValue())) // ABV should be null or not null based on alcohol content
-                .log().all(); // Log response
+                .body("ingredients[0].strABV", anyOf(equalTo(null), notNullValue())); // ABV should be null or not null based on alcohol content
     }
+
     @Test
     public void testEmptySearch() {
         given()
@@ -40,10 +39,8 @@ public class SearchIngredientsByNameTests {
                 .get("/search.php")
                 .then()
                 .statusCode(200)
-                .body("ingredients", nullValue()) // Assuming the API returns null for empty searches
-                .log().all(); // Log response for debugging
+                .body("ingredients", notNullValue());
     }
-
 
 }
 

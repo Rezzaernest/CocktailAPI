@@ -4,11 +4,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.anyOf;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 
-public class SearchCocktailsByNameTests {
+public class Test2_SearchCocktailsByName {
 
     @BeforeClass
     public static void setup() {
@@ -37,19 +35,18 @@ public class SearchCocktailsByNameTests {
                 .body("drinks[0].strImageSource", anyOf(equalTo(null), notNullValue())) // Image source can be null
                 .body("drinks[0].strImageAttribution", anyOf(equalTo(null), notNullValue())) // Image attribution can be null
                 .body("drinks[0].strCreativeCommonsConfirmed", notNullValue())
-                .body("drinks[0].dateModified", notNullValue())
-                .log().all(); // Log response
+                .body("drinks[0].dateModified", notNullValue());
     }
 
     @Test
-    public void testSpecialCharactersSearch() {
+    public void testAlphaNumericSearch() {
         given()
-                .param("i", "@#$%^&*()")
+                .param("i", "AbC12345")
                 .when()
                 .get("/search.php")
                 .then()
                 .statusCode(200)
-                .body("ingredients", nullValue()) // Assuming the API returns null for searches with special characters
-                .log().all(); // Log response for debugging
+                .body("ingredients", nullValue()); // Assuming the API returns an empty array for numeric searches
     }
+
 }

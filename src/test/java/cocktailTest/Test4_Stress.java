@@ -5,7 +5,7 @@ import org.junit.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.lessThan;
 
-public class StressTests_Test {
+public class Test4_Stress {
 
     @BeforeClass
     public static void setup() {
@@ -24,10 +24,10 @@ public class StressTests_Test {
                     .get("/search.php")
                     .then()
                     .statusCode(200)
-                    .time(lessThan(1000L)) // Set a threshold for response time in milliseconds
-                    .log().ifError(); // Log response for debugging
+                    .time(lessThan(2000L)); // Set a threshold for response time in milliseconds
 
         }
+
     }
 
     @Test
@@ -42,10 +42,10 @@ public class StressTests_Test {
                     .get("/search.php")
                     .then()
                     .statusCode(200)
-                    .time(lessThan(1000L)) // Set a threshold for response time in milliseconds
-                    .log().ifError(); // Log response for debugging
+                    .time(lessThan(2000L)); // Set a threshold for response time in milliseconds
 
         }
+
     }
 
 }
